@@ -6,7 +6,7 @@
 /*   By: tsaint-p <tsaint-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 20:30:48 by tsaint-p          #+#    #+#             */
-/*   Updated: 2023/05/05 22:18:53 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2023/05/06 07:35:36 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,11 +50,14 @@ char	*ft_strdup(const char *s)
 	res = malloc(sizeof(char) * i);
 	if (!res)
 		return (0x0);
-	while (i--)
+	res[i - 1] = '\0';
+	while (--i)
 		*res++ = *s++;
+	
 	return (res);
 }
 
+#include <stdio.h>
 char	*ft_strjoin(char const *s1, char const *s2)
 {
 	size_t	len;

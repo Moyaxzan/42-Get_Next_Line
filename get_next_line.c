@@ -6,7 +6,7 @@
 /*   By: tsaint-p <tsaint-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:09:44 by tsaint-p          #+#    #+#             */
-/*   Updated: 2023/05/05 23:55:17 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2023/05/06 07:50:32 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,17 @@ char	*get_line(int fd, char *buffer, char *relic)
 char	*get_relic(char *line)
 {
 	char	*relic;
+	int		pos;
 
 	//search for \n, (trucate line ?) and put the tail in relic
+	pos = 0;
+	while (line[pos] && line[pos] != '\n')
+		pos++;
+	if (!pos)	//useful ??
+		return (0x0);
+	relic = ft_substr(line, pos + 1, BUFFER_SIZE + 1);
+	line[pos + 1] = '\0';
+	return (relic);
 }
 
 char	*get_next_line(int fd)
@@ -61,5 +70,8 @@ char	*get_next_line(int fd)
 	if (!line)
 		return (0x0);
 	relic = get_relic(line);
+	if (!relic || (*relic == '\0' && *line == '\0')) //not sure it always works
+		return (0x0);
+	return (line);
 }
 
