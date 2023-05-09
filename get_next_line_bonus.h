@@ -6,15 +6,18 @@
 /*   By: tsaint-p <tsaint-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 20:32:11 by tsaint-p          #+#    #+#             */
-/*   Updated: 2023/05/09 16:25:27 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:00:01 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_BONUS_H
 # define GET_NEXT_LINE_BONUS_H
-//# define BUFFER_SIZE 42
+# ifndef BUFFER_SIZE
+#  define BUFFER_SIZE 10
+# endif
 # include <stdlib.h>
 # include <unistd.h>
+# define MAX_FD 64000
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *str);

@@ -6,7 +6,7 @@
 /*   By: tsaint-p <tsaint-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:09:44 by tsaint-p          #+#    #+#             */
-/*   Updated: 2023/05/09 16:25:57 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:04:20 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 #include <stdio.h>
 
-//get_line
 char	*get_line(int fd, char *buffer, char *relic, int *read_byte)
 {
 	char	*tmp;
@@ -39,14 +38,11 @@ char	*get_line(int fd, char *buffer, char *relic, int *read_byte)
 	return (relic);
 }
 
-//get_relic
-
 char	*get_relic(char *line)
 {
 	char	*relic;
 	int		pos;
 
-	//search for \n, (trucate line ?) and put the tail in relic
 	pos = 0;
 	while (line[pos] && line[pos] != '\n')
 		pos++;
@@ -70,7 +66,7 @@ void	free_all(void *buffer, void *line, void *relic)
 
 char	*get_next_line(int fd)
 {
-	static char	*relic;
+	static char	*relics[MAX_FD];
 	char		*line;
 	char		*buffer;
 	int		read_byte;
@@ -80,16 +76,16 @@ char	*get_next_line(int fd)
 	buffer = malloc(sizeof(char) * (BUFFER_SIZE + 1));
 	if (!buffer)
 		return (0x0);
-	line = get_line(fd, buffer, relic, &read_byte);
+	line = get_line(fd, buffer, relics[fd], &read_byte);
 	if (!line)
 	{
-		free_all(buffer, line, relic);
+		free_all(buffer, line, relics[fd]);
 		return (0x0);
 	}
-	relic = get_relic(line);
-	if (!read_byte && !relic)   //not sure it always works
+	relics[fd] = get_relic(line);
+	if (!read_byte && !relics[fd])
 	{
-		free_all(buffer, line, relic);
+		free_all(buffer, line, relics[fd]);
 		return (0x0);
 	}
 	free_all(buffer, 0x0, 0x0);
