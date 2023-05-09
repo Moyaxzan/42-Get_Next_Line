@@ -6,7 +6,7 @@
 /*   By: tsaint-p <tsaint-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:09:44 by tsaint-p          #+#    #+#             */
-/*   Updated: 2023/05/09 18:04:20 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2023/05/09 18:46:28 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,6 @@ char	*get_line(int fd, char *buffer, char *relic, int *read_byte)
 	char	*tmp;
 
 	*read_byte = 1;
-	//printf("")
 	while (*read_byte > 0 && (!relic || !ft_strchr(relic, '\n')))
 	{
 		*read_byte = read(fd, buffer, BUFFER_SIZE);
