@@ -6,11 +6,13 @@
 /*   By: tsaint-p <tsaint-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 17:09:44 by tsaint-p          #+#    #+#             */
-/*   Updated: 2023/05/06 10:28:32 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2023/05/09 15:13:23 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
+
+#include <stdio.h>
 
 //get_line
 char	*get_line(int fd, char *buffer, char *relic, int *read_byte)
@@ -18,6 +20,7 @@ char	*get_line(int fd, char *buffer, char *relic, int *read_byte)
 	char	*tmp;
 
 	*read_byte = 1;
+	//printf("")
 	while (*read_byte > 0 && (!relic || !ft_strchr(relic, '\n')))
 	{
 		*read_byte = read(fd, buffer, BUFFER_SIZE);
@@ -47,11 +50,22 @@ char	*get_relic(char *line)
 	pos = 0;
 	while (line[pos] && line[pos] != '\n')
 		pos++;
-	if (!pos)	//useful ??
+	if (!pos && !line[pos])
 		return (0x0);
 	relic = ft_substr(line, pos + 1, BUFFER_SIZE + 1);
-	line[pos + 1] = '\0';
+	if (line[pos])
+		line[pos + 1] = '\0';
 	return (relic);
+}
+
+void	free_all(void *buffer, void *line, void *relic)
+{
+	if (buffer)
+		free(buffer);
+	if (line)
+		free(line);
+	if (relic)
+		free(relic);
 }
 
 char	*get_next_line(int fd)
@@ -68,10 +82,17 @@ char	*get_next_line(int fd)
 		return (0x0);
 	line = get_line(fd, buffer, relic, &read_byte);
 	if (!line)
+	{
+		free_all(buffer, line, relic);
 		return (0x0);
+	}
 	relic = get_relic(line);
-	if (!relic || (*relic == '\0' && !read_byte)) //not sure it always works
+	if (!read_byte && !relic)   //not sure it always works
+	{
+		free_all(buffer, line, relic);
 		return (0x0);
+	}
+	free_all(buffer, 0x0, 0x0);
 	return (line);
 }
 

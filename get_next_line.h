@@ -6,13 +6,13 @@
 /*   By: tsaint-p <tsaint-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 20:32:11 by tsaint-p          #+#    #+#             */
-/*   Updated: 2023/05/05 20:45:05 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2023/05/08 18:35:44 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
-
+//# define BUFFER_SIZE 42
 # include <stdlib.h>
 # include <unistd.h>
 
