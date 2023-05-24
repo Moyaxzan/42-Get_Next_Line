@@ -6,7 +6,7 @@
 /*   By: tsaint-p <tsaint-p@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/05/05 20:32:11 by tsaint-p          #+#    #+#             */
-/*   Updated: 2023/05/09 18:00:01 by tsaint-p         ###   ########.fr       */
+/*   Updated: 2023/05/23 14:15:15 by tsaint-p         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # endif
 # include <stdlib.h>
 # include <unistd.h>
-# define MAX_FD 64000
+# define MAX_FD 1025
 
 char	*ft_substr(char const *s, unsigned int start, size_t len);
 size_t	ft_strlen(const char *str);
